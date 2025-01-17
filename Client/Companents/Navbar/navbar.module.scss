@@ -1,0 +1,29 @@
+*{
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    padding:  20px 400px;
+
+    .icons{
+        font-size: 20px;
+        display: flex;
+        gap: 10px;
+    }
+    .title{
+        display: flex;
+    }
+
+    ul{
+        display: flex;
+        gap: 20px;
+    }
+    a{
+        color: black;
+    }
+}
