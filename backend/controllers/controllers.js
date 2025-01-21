@@ -43,9 +43,9 @@ const getDataById = async (req, res) => {
 };
 
 const postData = async (req, res) => {
-  const { title, oldprice,price, imageUrl} = req.body;
+  const { title, description,price, imageUrl} = req.body;
 
-  if (!title|| !oldprice|| !price || !imageUrl) {
+  if (!title|| !description|| !price || !imageUrl) {
     return res
       .status(400)
       .json({ message: "Bad Request! All fileds should be add!" });

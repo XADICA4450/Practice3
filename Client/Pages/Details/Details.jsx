@@ -43,7 +43,7 @@ const Details = () => {
                     </Grid>
                     <Grid size={6} style={{ display: "flex", flexDirection: 'column', gap: "1rem", justifyContent: "center" }}>
                         <h3>title: {menu.title}</h3>
-                      
+                      <h2> description: {menu.description}</h2>
                         <p>Price: $ {menu.price}</p>
                     </Grid>
 
