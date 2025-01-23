@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid2';
 import { FaTruckFast } from "react-icons/fa6";
 import { RiFileList3Line } from "react-icons/ri";
@@ -6,12 +7,14 @@ import { BsCreditCard2BackFill } from "react-icons/bs";
 import { FaRegClock } from "react-icons/fa6";
 import { FaFacebookF, FaInfoCircle } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
+
 import { FaInstagram } from "react-icons/fa";
 import axios from "axios"
 import { BASE_URL } from "../../src/constans";
 import { Link } from "react-router-dom";
 import { CiShoppingBasket } from "react-icons/ci";
-
+import { WishlistContext } from "../Wishlist/Wishlist";
 import sytles from './home.module.scss'
 
 
@@ -26,7 +29,8 @@ const Home = () => {
 
   const [menu, setMenu] = useState([])
   const [menuCopy, setMenuCopy] = useState([])
-
+  const [searchQuery, setSearchQuery] = useState("")
+  const { toggleWishlist } = useContext(WishlistContext)
 
 
 
@@ -46,11 +50,25 @@ const Home = () => {
       }
   }
 
- 
+
+
+   const filteredMenu = menu.filter((m) => m.title.toLowerCase().includes(searchQuery.toLowerCase().trim()))
   useEffect(() => {
       getMenu()
   }, [])
 
+  const handleChange = (e) => {
+    let sortedMenu = null;
+    console.log(e.target.value);
+    if (e.target.value === "asc") {
+        sortedMenu = [...menu].toSorted((a, b) => a.price - b.price)
+    } else if (e.target.value === "desc") {
+        sortedMenu = [...menu].toSorted((a, b) => b.price - a.price)
+    } else {
+        sortedMenu= [...menuCopy]
+    }
+    setMenu([...sortedMenu])
+}
   return (
     <>
 <div className={sytles.container}>
@@ -84,6 +102,13 @@ const Home = () => {
 </Grid>
  
 <div className='backcard'>
+
+<select name="" id="" onChange={handleChange}>
+                            <option value="asc">ASC</option>
+                            <option value="desc">DESC</option>
+                            <option value="default">DEFAULT</option>
+                        </select>
+<TextField id="outlined-basic" label="Search" variant="outlined" onChange={(e) => { setSearchQuery(e.target.value) }} />
 <Grid container spacing={10}>
         {
             menu.length > 0 && menu.map((m) => {
@@ -101,6 +126,7 @@ const Home = () => {
                         <div style={{ display: "flex", gap: "1rem" }}>
                             <Link to={`/${m._id}`}><FaInfoCircle /></Link>
                             <Link to={`/${m._id}`}><CiShoppingBasket /></Link>
+                            <FaRegHeart onClick={() => { toggleWishlist(m) }} />
                           
                         </div>
                     </div>

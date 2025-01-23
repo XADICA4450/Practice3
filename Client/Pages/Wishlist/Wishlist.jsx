@@ -2,13 +2,12 @@ import { useContext } from "react";
 
 import Grid from '@mui/material/Grid2';
 
-
-
+import styles from "./wishlist.module.scss"
+import { WishlistContext } from "../../src/WishlistContext";
 
 import { FaRegHeart } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 
-import { WishlistContext } from "../../src/WishlistContext";
 
 
 
